@@ -1,6 +1,6 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-.idea
+.idea/
 __pycache__
 TrackerModules/__pycache__
