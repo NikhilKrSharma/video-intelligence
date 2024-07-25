@@ -163,13 +163,15 @@ cython_debug/
 
 #Human Detection
 __pycache__
-Human_detection/data/input_videos/*
-Human_detection/human_detection_env
-Human_detection/dataa/Analysis.yaml
-Human_detection/yolov8l.pt
-Human_detection/yolov8n.pt
+Human_detection_yoloV8_implementation/data/input_videos/*
+Human_detection_yoloV8_implementation/human_detection_env
+Human_detection_yoloV8_implementation/dataa/Analysis.yaml
+Human_detection_yoloV8_implementation/yolov8l.pt
+Human_detection_yoloV8_implementation/yolov8n.pt
 #Person_position_tracking_using_multiple_cameras
 Person_position_tracking_using_multiple_cameras/step.txt
 qdrant_storage
 Person_position_tracking_using_multiple_cameras/data/ouputs/*
 Person_position_tracking_using_multiple_cameras/tracker_env
+
+.DS_Store
