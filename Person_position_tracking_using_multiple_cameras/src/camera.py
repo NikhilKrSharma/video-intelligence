@@ -6,7 +6,7 @@ import threading
 import config
 
 class Camera:
-    def __init__(self, camera_no, location, zone_no, zone_name,interval, source):
+    def __init__(self, camera_no, location, zone_no, zone_name, interval, source):
         self.camera_no = camera_no
         self.location = location
         self.zone_no = zone_no
@@ -28,9 +28,9 @@ class Camera:
         # Process the frame to recognize faces and update the embeddings database
         # results = recognize_faces_from_frame(rgb_frame, embeddings_file)
         temp_image_path = f"{config.DATA_PATH}/temp/temp_frame.jpg"
-        cv2.imwrite(temp_image_path, frame)
+        cv2.imwrite(temp_image_path, rgb_frame)
         # Use the recognize_faces function to process the frame
-        camera_details = {"camera_no":self.camera_no,"zone_no":self.zone_no,"zone_name":self.zone_name}
+        camera_details = {"camera_no":self.camera_no, "zone_no":self.zone_no, "zone_name":self.zone_name}
         results = recognize_faces(temp_image_path, camera_details)
         return results
 

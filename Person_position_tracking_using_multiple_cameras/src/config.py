@@ -1,5 +1,5 @@
 FACE_MATCHING_THRESHOLD=0.64
-DATA_PATH="/Users/aman.raw/local_works/video-intelligence/Person_position_tracking_using_multiple_cameras/data"
+DATA_PATH="../data"
 QDRANT_URL="http://localhost:6333"
 MAX_CAMERA_COUNT=4
 FRAME_CAPTURE_INTERVAL=5

@@ -14,8 +14,6 @@ class Tracker:
         newCamera = Camera(camera_no,location,zone_no,zone_name,interval,source)
         self.cameras.append(newCamera)
     
-    # def removeCamera(camera_no):
-    #     cameras = [camera for camera in cameras if camera.camera_no is not camera_no]
 
     def startCameras(self, cameras_to_start):
         for camera in self.cameras:

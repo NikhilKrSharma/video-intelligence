@@ -12,7 +12,7 @@ print("connecting to Qdrant database")
 qdrantClient = QdrantClient(url=config.QDRANT_URL)
 print("connected to Qdrant Successfully.")
 
-def recognize_faces(image_path, camera_details={"camera_no":0,"zone_no":0,"zone_name":"Entrance"}):
+def recognize_faces(image_path, camera_details={"camera_no":0, "zone_no":0, "zone_name":"Entrance"}):
     # Load the image
     image = face_recognition.load_image_file(image_path)
     # Find all face locations in the image
@@ -62,8 +62,7 @@ def recognize_faces(image_path, camera_details={"camera_no":0,"zone_no":0,"zone_
         #     print(max_score)
 
 
-            if face_results[0].score>0.92:
-            # if max_score > 0.6:
+            if face_results[0].score>config.FACE_MATCHING_THRESHOLD:
                 print("face matches")
                 results.append(f"Face {i+1} matches with {face_results[0].id} with a similarity score of {face_results[0].score}")
                 matched_to.append(face_results[0].id)
@@ -83,13 +82,10 @@ def recognize_faces(image_path, camera_details={"camera_no":0,"zone_no":0,"zone_
                 upsert_result=qdrantClient.upsert(
                     collection_name = config.FACE_CLUSTER['NAME'],
                     wait=True,
-                    points=[
-                        models.PointStruct(id=f"{new_id}", vector=unknown_encoding.tolist(), payload=new_face_data)
-                    ]
+                    points=[models.PointStruct(id=f"{new_id}", vector=unknown_encoding.tolist(), payload=new_face_data)]
                 )
                 print(f"upsert_result::::::::::::{upsert_result}")
-                # known_embeddings_data.append(new_face_data)
-                # known_embeddings.append(unknown_encoding)
+                
         else:
             new_id = uuid.uuid4()
             results.append(f"Face {i+1} is a new face with id {new_id}")
@@ -106,20 +102,13 @@ def recognize_faces(image_path, camera_details={"camera_no":0,"zone_no":0,"zone_
             upsert_result=qdrantClient.upsert(
                 collection_name = config.FACE_CLUSTER['NAME'],
                 wait=True,
-                points=[
-                    models.PointStruct(id=f"{new_id}", vector=unknown_encoding.tolist(), payload=new_face_data)
-                ]
+                points=[models.PointStruct(id=f"{new_id}", vector=unknown_encoding.tolist(), payload=new_face_data)]
             )
             print(f"upsert_result::::::::::::{upsert_result}")
-            # known_embeddings_data.append(new_face_data)
-            # known_embeddings.append(unknown_encoding)
-    
-    # Save updated embeddings
-    # with open(embeddings_file, 'w') as f:
-    #     json.dump(known_embeddings_data, f)
+            
     
     # Save image with bounding boxes
-    save_image_with_bounding_boxes(image, face_locations, f"{config.DATA_PATH}/temp/detected_{image_path.split('/')[-1]}",matches = matched_to)
+    save_image_with_bounding_boxes(image, face_locations, f"{config.DATA_PATH}/temp/detected_{image_path.split('/')[-1]}", matches=matched_to)
     
     return results
 

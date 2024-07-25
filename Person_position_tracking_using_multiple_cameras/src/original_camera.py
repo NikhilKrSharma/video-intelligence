@@ -68,7 +68,7 @@ if __name__ == "__main__":
     import time
     
     # Create a Camera object for a video file or camera feed (use 0 for default camera)
-    camera1 = Camera(camera_no=1, location="Entrance", zone_no=1, zone_name="Main Entrance",interval=config.FRAME_CAPTURE_INTERVAL,source=0)
+    camera1 = Camera(camera_no=1, location="Entrance", zone_no=1, zone_name="Main Entrance", interval=config.FRAME_CAPTURE_INTERVAL, source=0)
     camera1.startCapturing()
 
 
