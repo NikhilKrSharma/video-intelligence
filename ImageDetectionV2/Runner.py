@@ -4,12 +4,12 @@ from TrackerModules.SortDetection import detectObject
 import os
 
 # Fetching all video files in the Media folder.
-def fetchVideos(count = 1, videos = [], directory = "Media"):
+def fetchVideos(count = 1, videos = [], directory = "ImageDetectionV2/Media"):
     for filename in os.listdir(directory):
         f = os.path.join(directory, filename)
         if os.path.isfile(f) and f.endswith('.mp4'):
             videos.append(f"{count}: {filename[:-4]}")
-        count += 1
+            count += 1
     return videos
 
 class ImageDetection:

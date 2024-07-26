@@ -3,6 +3,7 @@ import numpy as np
 import queue, cvzone, csv, math, os, cv2
 from TrackerModules.sort import *
 from tqdm import tqdm
+import logging
 
 class Person:
     def __init__(self, person_id, age, gender, snapshot, timestamp):
@@ -12,12 +13,15 @@ class Person:
         self.snapshot = snapshot
         self.timestamp = timestamp
 
+# Suppress YOLO logging
+logging.getLogger("ultralytics").setLevel(logging.ERROR)
+
 def detectObject(mode, video=None, save_video=False, show_video=True):
 
     model = YOLO("yolov8n.pt")
     
     # Load class names from classes.txt
-    with open('Config/classes.txt', 'r') as f:
+    with open('ImageDetectionV2/Config/classes.txt', 'r') as f:
         class_names = [line.strip() for line in f.readlines()]
 
     # Predefined colors for bounding boxes
@@ -38,7 +42,7 @@ def detectObject(mode, video=None, save_video=False, show_video=True):
     tracker = Sort(100, 3, 0.3)
 
     # Load face, age, and gender models
-    site = "DetectionModules/"     
+    site = "ImageDetectionV2/DetectionModules/"     
     face_net = cv2.dnn.readNet(f"{site}opencv_face_detector_uint8.pb", f"{site}opencv_face_detector.pbtxt")     
     age_net = cv2.dnn.readNetFromCaffe(f"{site}age_deploy.prototxt", f"{site}age_net.caffemodel")     
     gender_net = cv2.dnn.readNetFromCaffe(f"{site}gender_deploy.prototxt", f"{site}gender_net.caffemodel")
@@ -50,12 +54,12 @@ def detectObject(mode, video=None, save_video=False, show_video=True):
     if mode == 1:
         cap = cv2.VideoCapture(0)  # Use the laptop's camera
     else:
-        cap = cv2.VideoCapture(f"Media/{video}")  # Use the provided video file
+        cap = cv2.VideoCapture(f"ImageDetectionV2/Media/{video}")  # Use the provided video file
 
     # Prepare CSV file for output
     if not os.path.exists("output"):
         os.makedirs("output")
-    csv_file = open("output/people.csv", mode='w', newline='')
+    csv_file = open("ImageDetectionV2/output/people.csv", mode='w', newline='')
     csv_writer = csv.writer(csv_file)
     csv_writer.writerow(['ID', 'Gender', 'Age', 'Photo'])
 
