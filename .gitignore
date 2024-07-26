@@ -175,3 +175,4 @@ Person_position_tracking_using_multiple_cameras/data/ouputs/*
 Person_position_tracking_using_multiple_cameras/tracker_env
 
 .DS_Store
+.vscode
