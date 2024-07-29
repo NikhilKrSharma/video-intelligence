@@ -172,7 +172,8 @@ Human_detection_yoloV8_implementation/yolov8n.pt
 Person_position_tracking_using_multiple_cameras/step.txt
 qdrant_storage
 Person_position_tracking_using_multiple_cameras/data/ouputs/*
+Person_position_tracking_using_multiple_cameras/data/inputs
+Person_position_tracking_using_multiple_cameras/data/temp
 Person_position_tracking_using_multiple_cameras/tracker_env
-
 .DS_Store
 .vscode
