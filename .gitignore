@@ -177,3 +177,6 @@ Person_position_tracking_using_multiple_cameras/data/temp
 Person_position_tracking_using_multiple_cameras/tracker_env
 .DS_Store
 .vscode
+yolo-models/yolov8l.pt
+yolo-models/yolov8m.pt
+yolo-models/yolov8n.pt
